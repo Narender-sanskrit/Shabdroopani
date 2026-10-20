@@ -1,0 +1,1956 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>शब्दरूप संग्रह | Shabdroop Sangrah</title>
+
+<!-- Google Fonts: Tiro Devanagari Hindi -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+  /* Global Reset & Font */
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Tiro Devanagari Hindi', 'Noto Sans Devanagari', serif !important;
+  }
+
+  :root {
+    --primary-brown: #A54F18; 
+    --dark-brown: #853D0F;
+    --bg-color: #F9F6F0;
+    --text-dark: #3E2723;
+    --pill-bg: #FFFFFF;
+    --pill-border: #D7CCC8;
+    --table-header-bg: #A54F18;
+    --table-row-alt: #FDF5E6;
+  }
+
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-dark);
+    line-height: 1.6;
+    padding: 15px;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* Header Section */
+  .main-header {
+    background: linear-gradient(135deg, #B85D19, #8A4515);
+    border-radius: 12px;
+    padding: 20px;
+    color: #FFFFFF !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+  }
+
+  .header-title h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: #FFFFFF !important;
+    line-height: 1.3;
+  }
+
+  .header-title p {
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    color: #FFE4B5 !important;
+    margin: 0;
+  }
+
+  /* Search Box */
+  .search-wrapper {
+    position: relative;
+    width: 300px;
+    max-width: 100%;
+  }
+
+  .search-wrapper input {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 30px;
+    border: none;
+    font-size: 1rem;
+    outline: none;
+    background: #FFF;
+    color: #333 !important;
+  }
+
+  .search-suggestions {
+    position: absolute;
+    top: 105%;
+    left: 0;
+    right: 0;
+    background: #FFF;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    max-height: 250px;
+    overflow-y: auto;
+    z-index: 999;
+    display: none;
+  }
+
+  .search-suggestions div {
+    padding: 12px 20px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    color: #333 !important;
+  }
+
+  .search-suggestions div:hover {
+    background-color: #FDF5E6;
+    color: var(--primary-brown) !important;
+  }
+
+  /* Category Section */
+  .category-section {
+    background: #FFF;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border: 1px solid #EAE0D5;
+  }
+
+  .category-title {
+    font-size: 1.2rem;
+    color: var(--primary-brown) !important;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px dashed #E8D5C4;
+    font-weight: 700;
+  }
+
+  /* Pills Container */
+  .pills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .pill-btn {
+    background: var(--pill-bg);
+    border: 1px solid var(--pill-border);
+    color: var(--primary-brown) !important;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+
+  .pill-btn:hover {
+    background: #FDF5E6;
+    border-color: var(--primary-brown);
+  }
+
+  .pill-btn.active {
+    background: var(--primary-brown);
+    color: #FFFFFF !important;
+    border-color: var(--primary-brown);
+    box-shadow: 0 2px 5px rgba(165, 79, 24, 0.3);
+  }
+
+  /* Word Detail Section */
+  .word-detail-section {
+    display: none;
+    animation: fadeIn 0.4s ease;
+    margin-top: 20px;
+  }
+
+  .word-detail-section.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .word-heading {
+    text-align: center;
+    font-size: 1.4rem;
+    color: var(--primary-brown) !important;
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
+
+  /* Table Styling */
+  .table-container {
+    background: #FFF;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--pill-border);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  }
+
+  .table-header-bar {
+    background: var(--table-header-bg);
+    color: #FFFFFF !important;
+    text-align: center;
+    padding: 12px;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+  }
+
+  th, td {
+    padding: 12px 8px;
+    border: 1px solid #E8D5C4;
+    font-size: 1.05rem;
+  }
+
+  th {
+    background: #FDF5E6;
+    color: var(--primary-brown) !important;
+    font-weight: bold;
+  }
+
+  .vibhakti-col {
+    font-weight: bold;
+    color: var(--primary-brown) !important;
+    background: #FAFAFA;
+  }
+
+  tr:nth-child(even) td {
+    background: var(--table-row-alt);
+  }
+
+  /* Branding Footer */
+  .branding {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    background: #FFF;
+    border-radius: 12px;
+    border: 1px solid var(--pill-border);
+  }
+
+  .branding h3 {
+    color: var(--primary-brown) !important;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .branding p {
+    color: #6B4F3A !important;
+    margin-bottom: 15px;
+    font-size: 1rem;
+  }
+
+  .branding a {
+    display: inline-block;
+    background: var(--primary-brown);
+    color: #FFF !important;
+    text-decoration: none;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+
+  .branding a:hover {
+    background: var(--dark-brown);
+  }
+
+  @media (max-width: 600px) {
+    .main-header {
+      flex-direction: column;
+      text-align: center;
+      padding: 15px;
+    }
+    .search-wrapper {
+      width: 100%;
+    }
+    .table-header-bar { font-size: 1.1rem; }
+    th, td { padding: 10px 5px; font-size: 0.95rem; }
+    .pill-btn { font-size: 0.9rem; padding: 6px 14px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Header -->
+  <header class="main-header">
+    <div class="header-title">
+      <h1>शब्दरूप संग्रह</h1>
+      <p>SHABDROOP SANGRAH</p>
+    </div>
+    <div class="search-wrapper">
+      <input type="text" id="searchInput" placeholder="शब्द खोजें / Search (ram)" autocomplete="off">
+      <div class="search-suggestions" id="suggestionsBox"></div>
+    </div>
+  </header>
+
+  <!-- Category 1: अकारांत पुल्लिंग -->
+  <div class="category-section">
+    <div class="category-title">1. अकारांत पुल्लिंग</div>
+    <div class="pills-container" id="pills-akarant-pulling">
+      <button class="pill-btn active" onclick="showWord('akarant-pulling', 'ram', this)">राम</button>
+      <button class="pill-btn" onclick="showWord('akarant-pulling', 'dev', this)">देव</button>
+      <button class="pill-btn" onclick="showWord('akarant-pulling', 'nar', this)">नर</button>
+      <button class="pill-btn" onclick="showWord('akarant-pulling', 'ashva', this)">अश्व</button>
+      <button class="pill-btn" onclick="showWord('akarant-pulling', 'hasta', this)">हस्त</button>
+      <button class="pill-btn" onclick="showWord('akarant-pulling', 'balak', this)">बालक</button>
+    </div>
+    
+    <!-- राम टेबल -->
+    <div class="word-detail-section active" id="detail-akarant-pulling-ram">
+      <div class="word-heading">राम – पुल्लिंग (अकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">राम शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>रामः</td><td>रामौ</td><td>रामाः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>रामम्</td><td>रामौ</td><td>रामान्</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>रामेण</td><td>रामाभ्याम्</td><td>रामैः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>रामाय</td><td>रामाभ्याम्</td><td>रामेभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>रामात्</td><td>रामाभ्याम्</td><td>रामेभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>रामस्य</td><td>रामयोः</td><td>रामाणाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>रामे</td><td>रामयोः</td><td>रामेषु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे राम!</td><td>हे रामौ!</td><td>हे रामाः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- देव टेबल -->
+    <div class="word-detail-section" id="detail-akarant-pulling-dev">
+      <div class="word-heading">देव – पुल्लिंग (अकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">देव शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>देवः</td><td>देवौ</td><td>देवाः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>देवम्</td><td>देवौ</td><td>देवान्</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>देवेन</td><td>देवाभ्याम्</td><td>देवैः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>देवाय</td><td>देवाभ्याम्</td><td>देवेभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>देवात्</td><td>देवाभ्याम्</td><td>देवेभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>देवस्य</td><td>देवयोः</td><td>देवानाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>देवे</td><td>देवयोः</td><td>देवेषु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे देव!</td><td>हे देवौ!</td><td>हे देवाः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- नर टेबल -->
+    <div class="word-detail-section" id="detail-akarant-pulling-nar">
+      <div class="word-heading">नर – पुल्लिंग (अकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">नर शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>नरः</td><td>नरौ</td><td>नराः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>नरम्</td><td>नरौ</td><td>नरान्</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>नरेण</td><td>नराभ्याम्</td><td>नरैः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>नराय</td><td>नराभ्याम्</td><td>नरेभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>नरात्</td><td>नराभ्याम्</td><td>नरेभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>नरस्य</td><td>नरयोः</td><td>नराणाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>नरे</td><td>नरयोः</td><td>नरेषु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे नर!</td><td>हे नरौ!</td><td>हे नराः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- अश्व टेबल -->
+    <div class="word-detail-section" id="detail-akarant-pulling-ashva">
+      <div class="word-heading">अश्व – पुल्लिंग (अकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">अश्व शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>अश्वः</td><td>अश्वौ</td><td>अश्वाः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>अश्वम्</td><td>अश्वौ</td><td>अश्वान्</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>अश्वेन</td><td>अश्वाभ्याम्</td><td>अश्वैः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>अश्वाय</td><td>अश्वाभ्याम्</td><td>अश्वेभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>अश्वात्</td><td>अश्वाभ्याम्</td><td>अश्वेभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>अश्वस्य</td><td>अश्वयोः</td><td>अश्वानाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>अश्वे</td><td>अश्वयोः</td><td>अश्वेषु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे अश्व!</td><td>हे अश्वौ!</td><td>हे अश्वाः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- हस्त टेबल -->
+    <div class="word-detail-section" id="detail-akarant-pulling-hasta">
+      <div class="word-heading">हस्त – पुल्लिंग (अकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">हस्त शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>हस्तः</td><td>हस्तौ</td><td>हस्ताः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>हस्तम्</td><td>हस्तौ</td><td>हस्तान्</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>हस्तेन</td><td>हस्ताभ्याम्</td><td>हस्तैः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>हस्ताय</td><td>हस्ताभ्याम्</td><td>हस्तेभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>हस्तात्</td><td>हस्ताभ्याम्</td><td>हस्तेभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>हस्तस्य</td><td>हस्तयोः</td><td>हस्तानाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>हस्ते</td><td>हस्तयोः</td><td>हस्तेषु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे हस्त!</td><td>हे हस्तौ!</td><td>हे हस्ताः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- बालक टेबल -->
+    <div class="word-detail-section" id="detail-akarant-pulling-balak">
+      <div class="word-heading">बालक – पुल्लिंग (अकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">बालक शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>बालकः</td><td>बालकौ</td><td>बालकाः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>बालकम्</td><td>बालकौ</td><td>बालकान्</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>बालकेन</td><td>बालकाभ्याम्</td><td>बालकैः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>बालकाय</td><td>बालकाभ्याम्</td><td>बालकेभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>बालकात्</td><td>बालकाभ्याम्</td><td>बालकेभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>बालकस्य</td><td>बालकयोः</td><td>बालकानाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>बालके</td><td>बालकयोः</td><td>बालकेषु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे बालक!</td><td>हे बालकौ!</td><td>हे बालकाः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 2: आकारांत स्त्रीलिंग -->
+  <div class="category-section">
+    <div class="category-title">2. आकारांत स्त्रीलिंग</div>
+    <div class="pills-container" id="pills-akarant-stree">
+      <button class="pill-btn active" onclick="showWord('akarant-stree', 'sita', this)">सीता</button>
+      <button class="pill-btn" onclick="showWord('akarant-stree', 'lata', this)">लता</button>
+      <button class="pill-btn" onclick="showWord('akarant-stree', 'kanya', this)">कन्या</button>
+    </div>
+    
+    <!-- सीता टेबल -->
+    <div class="word-detail-section active" id="detail-akarant-stree-sita">
+      <div class="word-heading">सीता – स्त्रीलिंग (आकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">सीता शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>सीता</td><td>सीते</td><td>सीताः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>सीताम्</td><td>सीते</td><td>सीताः</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>सीतया</td><td>सीताभ्याम्</td><td>सीताभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>सीतायै</td><td>सीताभ्याम्</td><td>सीताभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>सीतायाः</td><td>सीताभ्याम्</td><td>सीताभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>सीतायाः</td><td>सीतयोः</td><td>सीतानाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>सीतायाम्</td><td>सीतयोः</td><td>सीतासु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे सीते!</td><td>हे सीते!</td><td>हे सीताः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- लता टेबल -->
+    <div class="word-detail-section" id="detail-akarant-stree-lata">
+      <div class="word-heading">लता – स्त्रीलिंग (आकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">लता शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>लता</td><td>लते</td><td>लताः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>लताम्</td><td>लते</td><td>लताः</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>लतया</td><td>लताभ्याम्</td><td>लताभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>लतायै</td><td>लताभ्याम्</td><td>लताभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>लतायाः</td><td>लताभ्याम्</td><td>लताभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>लतायाः</td><td>लतयोः</td><td>लतानाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>लतायाम्</td><td>लतयोः</td><td>लतासु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे लते!</td><td>हे लते!</td><td>हे लताः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- कन्या टेबल -->
+    <div class="word-detail-section" id="detail-akarant-stree-kanya">
+      <div class="word-heading">कन्या – स्त्रीलिंग (आकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">कन्या शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>कन्या</td><td>कन्ये</td><td>कन्याः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>कन्याम्</td><td>कन्ये</td><td>कन्याः</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>कन्यया</td><td>कन्याभ्याम्</td><td>कन्याभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>कन्यायै</td><td>कन्याभ्याम्</td><td>कन्याभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>कन्यायाः</td><td>कन्याभ्याम्</td><td>कन्याभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>कन्यायाः</td><td>कन्ययोः</td><td>कन्यानाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>कन्यायाम्</td><td>कन्ययोः</td><td>कन्यासु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे कन्ये!</td><td>हे कन्ये!</td><td>हे कन्याः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 3: इकारांत पुल्लिंग -->
+  <div class="category-section">
+    <div class="category-title">3. इकारांत पुल्लिंग</div>
+    <div class="pills-container" id="pills-ikarant-pulling">
+      <button class="pill-btn active" onclick="showWord('ikarant-pulling', 'hari', this)">हरि</button>
+      <button class="pill-btn" onclick="showWord('ikarant-pulling', 'kavi', this)">कवि</button>
+      <button class="pill-btn" onclick="showWord('ikarant-pulling', 'muni', this)">मुनि</button>
+      <button class="pill-btn" onclick="showWord('ikarant-pulling', 'agni', this)">अग्नि</button>
+    </div>
+    
+    <!-- हरि टेबल -->
+    <div class="word-detail-section active" id="detail-ikarant-pulling-hari">
+      <div class="word-heading">हरि – पुल्लिंग (इकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">हरि शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>हरिः</td><td>हरी</td><td>हरयः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>हरिम्</td><td>हरी</td><td>हरीन्</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>हरिणा</td><td>हरिभ्याम्</td><td>हरिभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>हरये</td><td>हरिभ्याम्</td><td>हरिभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>हरेः</td><td>हरिभ्याम्</td><td>हरिभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>हरेः</td><td>हर्योः</td><td>हरीणाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>हरौ</td><td>हर्योः</td><td>हरिषु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे हरे!</td><td>हे हरी!</td><td>हे हरयः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- कवि टेबल -->
+    <div class="word-detail-section" id="detail-ikarant-pulling-kavi">
+      <div class="word-heading">कवि – पुल्लिंग (इकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">कवि शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>कविः</td><td>कवी</td><td>कवयः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>कविम्</td><td>कवी</td><td>कवीन्</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>कविना</td><td>कविभ्याम्</td><td>कविभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>कवये</td><td>कविभ्याम्</td><td>कविभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>कवेः</td><td>कविभ्याम्</td><td>कविभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>कवेः</td><td>कव्योः</td><td>कवीनाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>कवौ</td><td>कव्योः</td><td>कविषु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे कवे!</td><td>हे कवी!</td><td>हे कवयः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- मुनि टेबल -->
+    <div class="word-detail-section" id="detail-ikarant-pulling-muni">
+      <div class="word-heading">मुनि – पुल्लिंग (इकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">मुनि शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>मुनिः</td><td>मुनी</td><td>मुनयः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>मुनिम्</td><td>मुनी</td><td>मुनीन्</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>मुनिना</td><td>मुनिभ्याम्</td><td>मुनिभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>मुनये</td><td>मुनिभ्याम्</td><td>मुनिभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>मुनेः</td><td>मुनिभ्याम्</td><td>मुनिभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>मुनेः</td><td>मुन्योः</td><td>मुनीनाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>मुनौ</td><td>मुन्योः</td><td>मुनिषु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे मुने!</td><td>हे मुनी!</td><td>हे मुनयः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- अग्नि टेबल -->
+    <div class="word-detail-section" id="detail-ikarant-pulling-agni">
+      <div class="word-heading">अग्नि – पुल्लिंग (इकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">अग्नि शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>अग्निः</td><td>अग्नी</td><td>अग्नयः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>अग्निम्</td><td>अग्नी</td><td>अग्नीन्</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>अग्निना</td><td>अग्निभ्याम्</td><td>अग्निभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>अग्नये</td><td>अग्निभ्याम्</td><td>अग्निभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>अग्नेः</td><td>अग्निभ्याम्</td><td>अग्निभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>अग्नेः</td><td>अग्न्योः</td><td>अग्नीनाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>अग्नौ</td><td>अग्न्योः</td><td>अग्निषु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे अग्ने!</td><td>हे अग्नी!</td><td>हे अग्नयः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 4: ईकारांत स्त्रीलिंग -->
+  <div class="category-section">
+    <div class="category-title">4. ईकारांत स्त्रीलिंग</div>
+    <div class="pills-container" id="pills-ikarant-stree">
+      <button class="pill-btn active" onclick="showWord('ikarant-stree', 'nadi', this)">नदी</button>
+      <button class="pill-btn" onclick="showWord('ikarant-stree', 'nagari', this)">नगरी</button>
+      <button class="pill-btn" onclick="showWord('ikarant-stree', 'shakti', this)">शक्ति</button>
+      <button class="pill-btn" onclick="showWord('ikarant-stree', 'mati', this)">मति</button>
+    </div>
+    
+    <!-- नदी टेबल -->
+    <div class="word-detail-section active" id="detail-ikarant-stree-nadi">
+      <div class="word-heading">नदी – स्त्रीलिंग (ईकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">नदी शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>नदी</td><td>नद्यौ</td><td>नद्यः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>नदीम्</td><td>नद्यौ</td><td>नदीः</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>नद्या</td><td>नदीभ्याम्</td><td>नदीभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>नद्यै</td><td>नदीभ्याम्</td><td>नदीभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>नद्याः</td><td>नदीभ्याम्</td><td>नदीभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>नद्याः</td><td>नद्योः</td><td>नदीनाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>नद्याम्</td><td>नद्योः</td><td>नदीषु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे नदि!</td><td>हे नद्यौ!</td><td>हे नद्यः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- नगरी टेबल -->
+    <div class="word-detail-section" id="detail-ikarant-stree-nagari">
+      <div class="word-heading">नगरी – स्त्रीलिंग (ईकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">नगरी शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>नगरी</td><td>नगर्यौ</td><td>नगर्यः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>नगरीम्</td><td>नगर्यौ</td><td>नगरीः</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>नगर्या</td><td>नगरीभ्याम्</td><td>नगरीभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>नगर्यै</td><td>नगरीभ्याम्</td><td>नगरीभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>नगर्याः</td><td>नगरीभ्याम्</td><td>नगरीभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>नगर्याः</td><td>नगर्योः</td><td>नगरीणाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>नगर्याम्</td><td>नगर्योः</td><td>नगरीषु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे नगरि!</td><td>हे नगर्यौ!</td><td>हे नगर्यः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- शक्ति टेबल -->
+    <div class="word-detail-section" id="detail-ikarant-stree-shakti">
+      <div class="word-heading">शक्ति – स्त्रीलिंग (इकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">शक्ति शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>शक्तिः</td><td>शक्ती</td><td>शक्तयः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>शक्तिम्</td><td>शक्ती</td><td>शक्तीः</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>शक्त्या</td><td>शक्तिभ्याम्</td><td>शक्तिभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>शक्त्यै</td><td>शक्तिभ्याम्</td><td>शक्तिभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>शक्त्याः</td><td>शक्तिभ्याम्</td><td>शक्तिभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>शक्त्याः</td><td>शक्त्योः</td><td>शक्तीनाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>शक्त्याम्</td><td>शक्त्योः</td><td>शक्तिषु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे शक्ते!</td><td>हे शक्ती!</td><td>हे शक्तयः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- मति टेबल -->
+    <div class="word-detail-section" id="detail-ikarant-stree-mati">
+      <div class="word-heading">मति – स्त्रीलिंग (इकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">मति शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>मतिः</td><td>मती</td><td>मतयः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>मतिम्</td><td>मती</td><td>मतीः</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>मत्या</td><td>मतिभ्याम्</td><td>मतिभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>मत्यै</td><td>मतिभ्याम्</td><td>मतिभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>मत्याः</td><td>मतिभ्याम्</td><td>मतिभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>मत्याः</td><td>मत्योः</td><td>मतीनाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>मत्याम्</td><td>मत्योः</td><td>मतिषु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे मते!</td><td>हे मती!</td><td>हे मतयः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 5: उकारांत पुल्लिंग -->
+  <div class="category-section">
+    <div class="category-title">5. उकारांत पुल्लिंग</div>
+    <div class="pills-container" id="pills-ukarant-pulling">
+      <button class="pill-btn active" onclick="showWord('ukarant-pulling', 'guru', this)">गुरु</button>
+      <button class="pill-btn" onclick="showWord('ukarant-pulling', 'shatru', this)">शत्रु</button>
+      <button class="pill-btn" onclick="showWord('ukarant-pulling', 'bhanu', this)">भानु</button>
+      <button class="pill-btn" onclick="showWord('ukarant-pulling', 'sadhu', this)">साधु</button>
+    </div>
+    
+    <!-- गुरु टेबल -->
+    <div class="word-detail-section active" id="detail-ukarant-pulling-guru">
+      <div class="word-heading">गुरु – पुल्लिंग (उकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">गुरु शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>गुरुः</td><td>गुरू</td><td>गुरवः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>गुरुम्</td><td>गुरू</td><td>गुरून्</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>गुरुणा</td><td>गुरुभ्याम्</td><td>गुरुभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>गुरवे</td><td>गुरुभ्याम्</td><td>गुरुभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>गुरोः</td><td>गुरुभ्याम्</td><td>गुरुभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>गुरोः</td><td>गुर्वोः</td><td>गुरूणाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>गुरौ</td><td>गुर्वोः</td><td>गुरुषु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे गुरो!</td><td>हे गुरू!</td><td>हे गुरवः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- शत्रु टेबल -->
+    <div class="word-detail-section" id="detail-ukarant-pulling-shatru">
+      <div class="word-heading">शत्रु – पुल्लिंग (उकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">शत्रु शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>शत्रुः</td><td>शत्रू</td><td>शत्रवः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>शत्रुम्</td><td>शत्रू</td><td>शत्रून्</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>शत्रुणा</td><td>शत्रुभ्याम्</td><td>शत्रुभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>शत्रवे</td><td>शत्रुभ्याम्</td><td>शत्रुभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>शत्रोः</td><td>शत्रुभ्याम्</td><td>शत्रुभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>शत्रोः</td><td>शत्र्वोः</td><td>शत्रूणाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>शत्रौ</td><td>शत्र्वोः</td><td>शत्रुषु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे शत्रो!</td><td>हे शत्रू!</td><td>हे शत्रवः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- भानु टेबल -->
+    <div class="word-detail-section" id="detail-ukarant-pulling-bhanu">
+      <div class="word-heading">भानु – पुल्लिंग (उकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">भानु शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>भानुः</td><td>भानू</td><td>भानवः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>भानुम्</td><td>भानू</td><td>भानून्</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>भानुना</td><td>भानुभ्याम्</td><td>भानुभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>भानवे</td><td>भानुभ्याम्</td><td>भानुभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>भानोः</td><td>भानुभ्याम्</td><td>भानुभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>भानोः</td><td>भान्वोः</td><td>भानूनाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>भानौ</td><td>भान्वोः</td><td>भानुषु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे भानो!</td><td>हे भानू!</td><td>हे भानवः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- साधु टेबल -->
+    <div class="word-detail-section" id="detail-ukarant-pulling-sadhu">
+      <div class="word-heading">साधु – पुल्लिंग (उकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">साधु शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>साधुः</td><td>साधू</td><td>साधवः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>साधुम्</td><td>साधू</td><td>साधून्</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>साधुना</td><td>साधुभ्याम्</td><td>साधुभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>साधवे</td><td>साधुभ्याम्</td><td>साधुभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>साधोः</td><td>साधुभ्याम्</td><td>साधुभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>साधोः</td><td>साध्वोः</td><td>साधूनाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>साधौ</td><td>साध्वोः</td><td>साधुषु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे साधो!</td><td>हे साधू!</td><td>हे साधवः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 6: नपुंसकलिंग (अकारांत) -->
+  <div class="category-section">
+    <div class="category-title">6. नपुंसकलिंग (अकारांत)</div>
+    <div class="pills-container" id="pills-napunsakling">
+      <button class="pill-btn active" onclick="showWord('napunsakling', 'phal', this)">फल</button>
+      <button class="pill-btn" onclick="showWord('napunsakling', 'jal', this)">जल</button>
+      <button class="pill-btn" onclick="showWord('napunsakling', 'van', this)">वन</button>
+    </div>
+    
+    <!-- फल टेबल -->
+    <div class="word-detail-section active" id="detail-napunsakling-phal">
+      <div class="word-heading">फल – नपुंसकलिंग (अकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">फल शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>फलम्</td><td>फले</td><td>फलानि</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>फलम्</td><td>फले</td><td>फलानि</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>फलेन</td><td>फलाभ्याम्</td><td>फलैः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>फलाय</td><td>फलाभ्याम्</td><td>फलेभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>फलात्</td><td>फलाभ्याम्</td><td>फलेभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>फलस्य</td><td>फलयोः</td><td>फलानाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>फले</td><td>फलयोः</td><td>फलेषु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे फल!</td><td>हे फले!</td><td>हे फलानि!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- जल टेबल -->
+    <div class="word-detail-section" id="detail-napunsakling-jal">
+      <div class="word-heading">जल – नपुंसकलिंग (अकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">जल शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>जलम्</td><td>जले</td><td>जलानि</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>जलम्</td><td>जले</td><td>जलानि</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>जलेन</td><td>जलाभ्याम्</td><td>जलैः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>जलाय</td><td>जलाभ्याम्</td><td>जलेभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>जलात्</td><td>जलाभ्याम्</td><td>जलेभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>जलस्य</td><td>जलयोः</td><td>जलानाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>जले</td><td>जलयोः</td><td>जलेषु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे जल!</td><td>हे जले!</td><td>हे जलानि!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- वन टेबल -->
+    <div class="word-detail-section" id="detail-napunsakling-van">
+      <div class="word-heading">वन – नपुंसकलिंग (अकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">वन शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>वनम्</td><td>वने</td><td>वनानि</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>वनम्</td><td>वने</td><td>वनानि</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>वनेन</td><td>वनाभ्याम्</td><td>वनैः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>वनाय</td><td>वनाभ्याम्</td><td>वनेभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>वनात्</td><td>वनाभ्याम्</td><td>वनेभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>वनस्य</td><td>वनयोः</td><td>वनानाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>वने</td><td>वनयोः</td><td>वनेषु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे वन!</td><td>हे वने!</td><td>हे वनानि!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 7: ऋकारांत पुल्लिंग -->
+  <div class="category-section">
+    <div class="category-title">7. ऋकारांत पुल्लिंग</div>
+    <div class="pills-container" id="pills-rikarant-pulling">
+      <button class="pill-btn active" onclick="showWord('rikarant-pulling', 'pitri', this)">पितृ</button>
+      <button class="pill-btn" onclick="showWord('rikarant-pulling', 'bhratri', this)">भ्रातृ</button>
+      <button class="pill-btn" onclick="showWord('rikarant-pulling', 'datri', this)">दातृ</button>
+    </div>
+    
+    <!-- पितृ टेबल -->
+    <div class="word-detail-section active" id="detail-rikarant-pulling-pitri">
+      <div class="word-heading">पितृ – पुल्लिंग (ऋकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">पितृ शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>पिता</td><td>पितरौ</td><td>पितरः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>पितरम्</td><td>पितरौ</td><td>पितॄन्</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>पित्रा</td><td>पितृभ्याम्</td><td>पितृभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>पित्रे</td><td>पितृभ्याम्</td><td>पितृभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>पितुः</td><td>पितृभ्याम्</td><td>पितृभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>पितुः</td><td>पित्रोः</td><td>पितॄणाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>पितरि</td><td>पित्रोः</td><td>पितृषु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे पितः!</td><td>हे पितरौ!</td><td>हे पितरः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- भ्रातृ टेबल -->
+    <div class="word-detail-section" id="detail-rikarant-pulling-bhratri">
+      <div class="word-heading">भ्रातृ – पुल्लिंग (ऋकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">भ्रातृ शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>भ्राता</td><td>भ्रातरौ</td><td>भ्रातरः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>भ्रातरम्</td><td>भ्रातरौ</td><td>भ्रातॄन्</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>भ्रात्रा</td><td>भ्रातृभ्याम्</td><td>भ्रातृभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>भ्रात्रे</td><td>भ्रातृभ्याम्</td><td>भ्रातृभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>भ्रातुः</td><td>भ्रातृभ्याम्</td><td>भ्रातृभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>भ्रातुः</td><td>भ्रात्रोः</td><td>भ्रातॄणाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>भ्रातरि</td><td>भ्रात्रोः</td><td>भ्रातृषु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे भ्रातः!</td><td>हे भ्रातरौ!</td><td>हे भ्रातरः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- दातृ टेबल -->
+    <div class="word-detail-section" id="detail-rikarant-pulling-datri">
+      <div class="word-heading">दातृ – पुल्लिंग (ऋकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">दातृ शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>दाता</td><td>दातारौ</td><td>दातारः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>दातारम्</td><td>दातारौ</td><td>दातॄन्</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>दात्रा</td><td>दातृभ्याम्</td><td>दातृभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>दात्रे</td><td>दातृभ्याम्</td><td>दातृभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>दातुः</td><td>दातृभ्याम्</td><td>दातृभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>दातुः</td><td>दात्रोः</td><td>दातॄणाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>दातरि</td><td>दात्रोः</td><td>दातृषु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे दातः!</td><td>हे दातारौ!</td><td>हे दातारः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 8: ऋकारांत स्त्रीलिंग -->
+  <div class="category-section">
+    <div class="category-title">8. ऋकारांत स्त्रीलिंग</div>
+    <div class="pills-container" id="pills-rikarant-stree">
+      <button class="pill-btn active" onclick="showWord('rikarant-stree', 'matri', this)">मातृ</button>
+      <button class="pill-btn" onclick="showWord('rikarant-stree', 'swasri', this)">स्वसृ</button>
+    </div>
+    
+    <!-- मातृ टेबल -->
+    <div class="word-detail-section active" id="detail-rikarant-stree-matri">
+      <div class="word-heading">मातृ – स्त्रीलिंग (ऋकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">मातृ शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>माता</td><td>मातरौ</td><td>मातरः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>मातरम्</td><td>मातरौ</td><td>मातॄः</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>मात्रा</td><td>मातृभ्याम्</td><td>मातृभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>मात्रे</td><td>मातृभ्याम्</td><td>मातृभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>मातुः</td><td>मातृभ्याम्</td><td>मातृभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>मातुः</td><td>मात्रोः</td><td>मातॄणाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>मातरि</td><td>मात्रोः</td><td>मातृषु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे मातः!</td><td>हे मातरौ!</td><td>हे मातरः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- स्वसृ टेबल -->
+    <div class="word-detail-section" id="detail-rikarant-stree-swasri">
+      <div class="word-heading">स्वसृ – स्त्रीलिंग (ऋकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">स्वसृ शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>स्वसा</td><td>स्वसारौ</td><td>स्वसारः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>स्वसारम्</td><td>स्वसारौ</td><td>स्वसॄः</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>स्वस्रा</td><td>स्वसृभ्याम्</td><td>स्वसृभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>स्वस्रे</td><td>स्वसृभ्याम्</td><td>स्वसृभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>स्वसुः</td><td>स्वसृभ्याम्</td><td>स्वसृभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>स्वसुः</td><td>स्वस्रोः</td><td>स्वसॄणाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>स्वसरि</td><td>स्वस्रोः</td><td>स्वसृषु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे स्वसः!</td><td>हे स्वसारौ!</td><td>हे स्वसारः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 9: उकारांत / ऊकारांत स्त्रीलिंग -->
+  <div class="category-section">
+    <div class="category-title">9. उकारांत / ऊकारांत स्त्रीलिंग</div>
+    <div class="pills-container" id="pills-ukarant-stree">
+      <button class="pill-btn active" onclick="showWord('ukarant-stree', 'vadhu', this)">वधू</button>
+      <button class="pill-btn" onclick="showWord('ukarant-stree', 'chamu', this)">चमू</button>
+      <button class="pill-btn" onclick="showWord('ukarant-stree', 'dhenu', this)">धेनु</button>
+    </div>
+    
+    <!-- वधू टेबल -->
+    <div class="word-detail-section active" id="detail-ukarant-stree-vadhu">
+      <div class="word-heading">वधू – स्त्रीलिंग (ऊकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">वधू शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>वधूः</td><td>वध्वौ</td><td>वध्वः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>वधूम्</td><td>वध्वौ</td><td>वधूः</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>वध्वा</td><td>वधूभ्याम्</td><td>वधूभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>वध्वै</td><td>वधूभ्याम्</td><td>वधूभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>वध्वाः</td><td>वधूभ्याम्</td><td>वधूभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>वध्वाः</td><td>वध्वोः</td><td>वधूनाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>वध्वाम्</td><td>वध्वोः</td><td>वधूषु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे वधु!</td><td>हे वध्वौ!</td><td>हे वध्वः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- चमू टेबल -->
+    <div class="word-detail-section" id="detail-ukarant-stree-chamu">
+      <div class="word-heading">चमू – स्त्रीलिंग (ऊकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">चमू शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>चमूः</td><td>चम्वौ</td><td>चम्वः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>चमूम्</td><td>चम्वौ</td><td>चमूः</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>चम्वा</td><td>चमूभ्याम्</td><td>चमूभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>चम्वै</td><td>चमूभ्याम्</td><td>चमूभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>चम्वाः</td><td>चमूभ्याम्</td><td>चमूभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>चम्वाः</td><td>चम्वोः</td><td>चमूनाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>चम्वाम्</td><td>चम्वोः</td><td>चमूषु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे चमु!</td><td>हे चम्वौ!</td><td>हे चम्वः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- धेनु टेबल -->
+    <div class="word-detail-section" id="detail-ukarant-stree-dhenu">
+      <div class="word-heading">धेनु – स्त्रीलिंग (उकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">धेनु शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>धेनुः</td><td>धेनू</td><td>धेनवः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>धेनुम्</td><td>धेनू</td><td>धेनूः</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>धेन्वा</td><td>धेनुभ्याम्</td><td>धेनुभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>धेन्वै</td><td>धेनुभ्याम्</td><td>धेनुभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>धेन्वाः</td><td>धेनुभ्याम्</td><td>धेनुभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>धेन्वाः</td><td>धेन्वोः</td><td>धेनूनाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>धेन्वाम्</td><td>धेन्वोः</td><td>धेनुषु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे धेनो!</td><td>हे धेनू!</td><td>हे धेनवः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 10: हलंत पुल्लिंग -->
+  <div class="category-section">
+    <div class="category-title">10. हलंत पुल्लिंग</div>
+    <div class="pills-container" id="pills-halant-pulling">
+      <button class="pill-btn active" onclick="showWord('halant-pulling', 'rajan', this)">राजन्</button>
+      <button class="pill-btn" onclick="showWord('halant-pulling', 'atman', this)">आत्मन्</button>
+      <button class="pill-btn" onclick="showWord('halant-pulling', 'bhagavat', this)">भगवत्</button>
+      <button class="pill-btn" onclick="showWord('halant-pulling', 'bhavat', this)">भवत्</button>
+      <button class="pill-btn" onclick="showWord('halant-pulling', 'vidvas', this)">विद्वस्</button>
+    </div>
+    
+    <!-- राजन् टेबल -->
+    <div class="word-detail-section active" id="detail-halant-pulling-rajan">
+      <div class="word-heading">राजन् – पुल्लिंग (हलंत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">राजन् शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>राजा</td><td>राजानौ</td><td>राजानः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>राजानम्</td><td>राजानौ</td><td>राज्ञः</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>राज्ञा</td><td>राजभ्याम्</td><td>राजभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>राज्ञे</td><td>राजभ्याम्</td><td>राजभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>राज्ञः</td><td>राजभ्याम्</td><td>राजभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>राज्ञः</td><td>राज्ञोः</td><td>राज्ञाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>राज्ञि / राजनि</td><td>राज्ञोः</td><td>राजसु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे राजन्!</td><td>हे राजानौ!</td><td>हे राजानः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- आत्मन् टेबल -->
+    <div class="word-detail-section" id="detail-halant-pulling-atman">
+      <div class="word-heading">आत्मन् – पुल्लिंग (हलंत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">आत्मन् शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>आत्मा</td><td>आत्मानौ</td><td>आत्मानः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>आत्मानम्</td><td>आत्मानौ</td><td>आत्मनः</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>आत्मना</td><td>आत्मभ्याम्</td><td>आत्मभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>आत्मने</td><td>आत्मभ्याम्</td><td>आत्मभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>आत्मनः</td><td>आत्मभ्याम्</td><td>आत्मभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>आत्मनः</td><td>आत्मनोः</td><td>आत्मनाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>आत्मनि</td><td>आत्मनोः</td><td>आत्मसु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे आत्मन्!</td><td>हे आत्मानौ!</td><td>हे आत्मानः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- भगवत् टेबल -->
+    <div class="word-detail-section" id="detail-halant-pulling-bhagavat">
+      <div class="word-heading">भगवत् – पुल्लिंग (हलंत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">भगवत् शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>भगवान्</td><td>भगवन्तौ</td><td>भगवन्तः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>भगवन्तम्</td><td>भगवन्तौ</td><td>भगवतः</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>भगवता</td><td>भगवद्भ्याम्</td><td>भगवद्भिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>भगवते</td><td>भगवद्भ्याम्</td><td>भगवद्भ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>भगवतः</td><td>भगवद्भ्याम्</td><td>भगवद्भ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>भगवतः</td><td>भगवतोः</td><td>भगवताम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>भगवति</td><td>भगवतोः</td><td>भगवत्सु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे भगवन्!</td><td>हे भगवन्तौ!</td><td>हे भगवन्तः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- भवत् टेबल -->
+    <div class="word-detail-section" id="detail-halant-pulling-bhavat">
+      <div class="word-heading">भवत् – पुल्लिंग (हलंत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">भवत् शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>भवान्</td><td>भवन्तौ</td><td>भवन्तः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>भवन्तम्</td><td>भवन्तौ</td><td>भवतः</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>भवता</td><td>भवद्भ्याम्</td><td>भवद्भिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>भवते</td><td>भवद्भ्याम्</td><td>भवद्भ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>भवतः</td><td>भवद्भ्याम्</td><td>भवद्भ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>भवतः</td><td>भवतोः</td><td>भवताम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>भवति</td><td>भवतोः</td><td>भवत्सु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे भवन्!</td><td>हे भवन्तौ!</td><td>हे भवन्तः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- विद्वस् टेबल -->
+    <div class="word-detail-section" id="detail-halant-pulling-vidvas">
+      <div class="word-heading">विद्वस् – पुल्लिंग (हलंत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">विद्वस् शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>विद्वान्</td><td>विद्वांसौ</td><td>विद्वांसः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>विद्वांसम्</td><td>विद्वांसौ</td><td>विदुषः</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>विदुषा</td><td>विद्वद्भ्याम्</td><td>विद्वद्भिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>विदुषे</td><td>विद्वद्भ्याम्</td><td>विद्वद्भ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>विदुषः</td><td>विद्वद्भ्याम्</td><td>विद्वद्भ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>विदुषः</td><td>विदुषोः</td><td>विदुषाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>विदुषि</td><td>विदुषोः</td><td>विद्वत्सु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे विद्वन्!</td><td>हे विद्वांसौ!</td><td>हे विद्वांसः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 11: हलंत स्त्रीलिंग -->
+  <div class="category-section">
+    <div class="category-title">11. हलंत स्त्रीलिंग</div>
+    <div class="pills-container" id="pills-halant-stree">
+      <button class="pill-btn active" onclick="showWord('halant-stree', 'vach', this)">वाच्</button>
+      <button class="pill-btn" onclick="showWord('halant-stree', 'sraj', this)">स्रज्</button>
+    </div>
+    
+    <!-- वाच् टेबल -->
+    <div class="word-detail-section active" id="detail-halant-stree-vach">
+      <div class="word-heading">वाच् – स्त्रीलिंग (हलंत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">वाच् शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>वाक्</td><td>वाचौ</td><td>वाचः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>वाचम्</td><td>वाचौ</td><td>वाचः</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>वाचा</td><td>वाग्भ्याम्</td><td>वाग्भिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>वाचे</td><td>वाग्भ्याम्</td><td>वाग्भ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>वाचः</td><td>वाग्भ्याम्</td><td>वाग्भ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>वाचः</td><td>वाचोः</td><td>वाचाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>वाचि</td><td>वाचोः</td><td>वाक्षु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे वाक्!</td><td>हे वाचौ!</td><td>हे वाचः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- स्रज् टेबल -->
+    <div class="word-detail-section" id="detail-halant-stree-sraj">
+      <div class="word-heading">स्रज् – स्त्रीलिंग (हलंत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">स्रज् शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>स्रक्</td><td>स्रजौ</td><td>स्रजः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>स्रजम्</td><td>स्रजौ</td><td>स्रजः</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>स्रजा</td><td>स्रग्भ्याम्</td><td>स्रग्भिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>स्रजे</td><td>स्रग्भ्याम्</td><td>स्रग्भ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>स्रजः</td><td>स्रग्भ्याम्</td><td>स्रग्भ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>स्रजः</td><td>स्रजोः</td><td>स्रजाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>स्रजि</td><td>स्रजोः</td><td>स्रक्षु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे स्रक्!</td><td>हे स्रजौ!</td><td>हे स्रजः!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 12: हलंत नपुंसकलिंग -->
+  <div class="category-section">
+    <div class="category-title">12. हलंत नपुंसकलिंग</div>
+    <div class="pills-container" id="pills-halant-napunsakling">
+      <button class="pill-btn active" onclick="showWord('halant-napunsakling', 'jagat', this)">जगत्</button>
+      <button class="pill-btn" onclick="showWord('halant-napunsakling', 'manas', this)">मनस्</button>
+      <button class="pill-btn" onclick="showWord('halant-napunsakling', 'chakshush', this)">चक्षुष्</button>
+    </div>
+    
+    <!-- जगत् टेबल -->
+    <div class="word-detail-section active" id="detail-halant-napunsakling-jagat">
+      <div class="word-heading">जगत् – नपुंसकलिंग (हलंत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">जगत् शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>जगत्</td><td>जगती</td><td>जगन्ति</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>जगत्</td><td>जगती</td><td>जगन्ति</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>जगता</td><td>जगद्भ्याम्</td><td>जगद्भिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>जगते</td><td>जगद्भ्याम्</td><td>जगद्भ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>जगतः</td><td>जगद्भ्याम्</td><td>जगद्भ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>जगतः</td><td>जगतोः</td><td>जगताम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>जगति</td><td>जगतोः</td><td>जगत्सु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे जगत्!</td><td>हे जगती!</td><td>हे जगन्ति!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- मनस् टेबल -->
+    <div class="word-detail-section" id="detail-halant-napunsakling-manas">
+      <div class="word-heading">मनस् – नपुंसकलिंग (हलंत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">मनस् शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>मनः</td><td>मनसी</td><td>मनांसि</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>मनः</td><td>मनसी</td><td>मनांसि</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>मनसा</td><td>मनोभ्याम्</td><td>मनोभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>मनसे</td><td>मनोभ्याम्</td><td>मनोभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>मनसः</td><td>मनोभ्याम्</td><td>मनोभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>मनसः</td><td>मनसोः</td><td>मनसाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>मनसि</td><td>मनसोः</td><td>मनःसु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे मनः!</td><td>हे मनसी!</td><td>हे मनांसि!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- चक्षुष् टेबल -->
+    <div class="word-detail-section" id="detail-halant-napunsakling-chakshush">
+      <div class="word-heading">चक्षुष् – नपुंसकलिंग (हलंत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">चक्षुष् शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>चक्षुः</td><td>चक्षुषी</td><td>चक्षूंषि</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>चक्षुः</td><td>चक्षुषी</td><td>चक्षूंषि</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>चक्षुषा</td><td>चक्षुर्भ्याम्</td><td>चक्षुर्भिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>चक्षुषे</td><td>चक्षुर्भ्याम्</td><td>चक्षुर्भ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>चक्षुषः</td><td>चक्षुर्भ्याम्</td><td>चक्षुर्भ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>चक्षुषः</td><td>चक्षुषोः</td><td>चक्षुषाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>चक्षुषि</td><td>चक्षुषोः</td><td>चक्षुःसु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे चक्षुः!</td><td>हे चक्षुषी!</td><td>हे चक्षूंषि!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 13: नपुंसकलिंग (इकारांत) -->
+  <div class="category-section">
+    <div class="category-title">13. नपुंसकलिंग (इकारांत)</div>
+    <div class="pills-container" id="pills-napunsak-ikarant">
+      <button class="pill-btn active" onclick="showWord('napunsak-ikarant', 'vari', this)">वारि</button>
+    </div>
+    
+    <!-- वारि टेबल -->
+    <div class="word-detail-section active" id="detail-napunsak-ikarant-vari">
+      <div class="word-heading">वारि – नपुंसकलिंग (इकारांत)</div>
+      <div class="table-container">
+        <div class="table-header-bar">वारि शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>वारि</td><td>वारिणी</td><td>वारीणि</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>वारि</td><td>वारिणी</td><td>वारीणि</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>वारिणा</td><td>वारिभ्याम्</td><td>वारिभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>वारिणे</td><td>वारिभ्याम्</td><td>वारिभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>वारिणः</td><td>वारिभ्याम्</td><td>वारिभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>वारिणः</td><td>वारिणोः</td><td>वारिणाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>वारिणि</td><td>वारिणोः</td><td>वारिषु</td></tr>
+              <tr><td class="vibhakti-col">सम्बोधन</td><td>हे वारि!</td><td>हे वारिणी!</td><td>हे वारीणि!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 14: सर्वनाम (पुल्लिंग) -->
+  <div class="category-section">
+    <div class="category-title">14. सर्वनाम (पुल्लिंग)</div>
+    <div class="pills-container" id="pills-sarvanaam-pulling">
+      <button class="pill-btn active" onclick="showWord('sarvanaam-pulling', 'tad', this)">तद् (सः)</button>
+      <button class="pill-btn" onclick="showWord('sarvanaam-pulling', 'etad', this)">एतद् (एषः)</button>
+      <button class="pill-btn" onclick="showWord('sarvanaam-pulling', 'kim', this)">किम् (कः)</button>
+      <button class="pill-btn" onclick="showWord('sarvanaam-pulling', 'idam', this)">इदम् (अयम्)</button>
+    </div>
+    
+    <!-- तद् (पुल्लिंग) टेबल -->
+    <div class="word-detail-section active" id="detail-sarvanaam-pulling-tad">
+      <div class="word-heading">तद् – पुल्लिंग (सः)</div>
+      <div class="table-container">
+        <div class="table-header-bar">तद् शब्दरूप (पुल्लिंग)</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>सः</td><td>तौ</td><td>ते</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>तम्</td><td>तौ</td><td>तान्</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>तेन</td><td>ताभ्याम्</td><td>तैः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>तस्मै</td><td>ताभ्याम्</td><td>तेभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>तस्मात्</td><td>ताभ्याम्</td><td>तेभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>तस्य</td><td>तयोः</td><td>तेषाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>तस्मिन्</td><td>तयोः</td><td>तेषु</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- एतद् (पुल्लिंग) टेबल -->
+    <div class="word-detail-section" id="detail-sarvanaam-pulling-etad">
+      <div class="word-heading">एतद् – पुल्लिंग (एषः)</div>
+      <div class="table-container">
+        <div class="table-header-bar">एतद् शब्दरूप (पुल्लिंग)</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>एषः</td><td>एतौ</td><td>एते</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>एतम्</td><td>एतौ</td><td>एतान्</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>एतेन</td><td>एताभ्याम्</td><td>एतैः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>एतस्मै</td><td>एताभ्याम्</td><td>एतेभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>एतस्मात्</td><td>एताभ्याम्</td><td>एतेभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>एतस्य</td><td>एतयोः</td><td>एतेषाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>एतस्मिन्</td><td>एतयोः</td><td>एतेषु</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- किम् (पुल्लिंग) टेबल -->
+    <div class="word-detail-section" id="detail-sarvanaam-pulling-kim">
+      <div class="word-heading">किम् – पुल्लिंग (कः)</div>
+      <div class="table-container">
+        <div class="table-header-bar">किम् शब्दरूप (पुल्लिंग)</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>कः</td><td>कौ</td><td>के</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>कम्</td><td>कौ</td><td>कान्</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>केन</td><td>काभ्याम्</td><td>कैः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>कस्मै</td><td>काभ्याम्</td><td>केभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>कस्मात्</td><td>काभ्याम्</td><td>केभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>कस्य</td><td>कयोः</td><td>केषाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>कस्मिन्</td><td>कयोः</td><td>केषु</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- इदम् (पुल्लिंग) टेबल -->
+    <div class="word-detail-section" id="detail-sarvanaam-pulling-idam">
+      <div class="word-heading">इदम् – पुल्लिंग (अयम्)</div>
+      <div class="table-container">
+        <div class="table-header-bar">इदम् शब्दरूप (पुल्लिंग)</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>अयम्</td><td>इमौ</td><td>इमे</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>इमम्</td><td>इमौ</td><td>इमान्</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>अनेन</td><td>आभ्याम्</td><td>एभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>अस्मै</td><td>आभ्याम्</td><td>एभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>अतः / अस्मात्</td><td>आभ्याम्</td><td>एभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>अस्य</td><td>अनयोः</td><td>एषाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>अस्मिन्</td><td>अनयोः</td><td>एषु</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 15: सर्वनाम (स्त्रीलिंग) -->
+  <div class="category-section">
+    <div class="category-title">15. सर्वनाम (स्त्रीलिंग)</div>
+    <div class="pills-container" id="pills-sarvanaam-stree">
+      <button class="pill-btn active" onclick="showWord('sarvanaam-stree', 'tad', this)">तद् (सा)</button>
+      <button class="pill-btn" onclick="showWord('sarvanaam-stree', 'etad', this)">एतद् (एषा)</button>
+      <button class="pill-btn" onclick="showWord('sarvanaam-stree', 'kim', this)">किम् (का)</button>
+      <button class="pill-btn" onclick="showWord('sarvanaam-stree', 'idam', this)">इदम् (इयम्)</button>
+    </div>
+    
+    <!-- तद् (स्त्रीलिंग) टेबल -->
+    <div class="word-detail-section active" id="detail-sarvanaam-stree-tad">
+      <div class="word-heading">तद् – स्त्रीलिंग (सा)</div>
+      <div class="table-container">
+        <div class="table-header-bar">तद् शब्दरूप (स्त्रीलिंग)</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>सा</td><td>ते</td><td>ताः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>ताम्</td><td>ते</td><td>ताः</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>तया</td><td>ताभ्याम्</td><td>ताभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>तस्यै</td><td>ताभ्याम्</td><td>ताभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>तस्याः</td><td>ताभ्याम्</td><td>ताभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>तस्याः</td><td>तयोः</td><td>तासाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>तस्याम्</td><td>तयोः</td><td>तासु</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- एतद् (स्त्रीलिंग) टेबल -->
+    <div class="word-detail-section" id="detail-sarvanaam-stree-etad">
+      <div class="word-heading">एतद् – स्त्रीलिंग (एषा)</div>
+      <div class="table-container">
+        <div class="table-header-bar">एतद् शब्दरूप (स्त्रीलिंग)</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>एषा</td><td>एते</td><td>एताः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>एताम्</td><td>एते</td><td>एताः</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>एतया</td><td>एताभ्याम्</td><td>एताभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>एतस्यै</td><td>एताभ्याम्</td><td>एताभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>एतस्याः</td><td>एताभ्याम्</td><td>एताभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>एतस्याः</td><td>एतयोः</td><td>एतासाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>एतस्याम्</td><td>एतयोः</td><td>एतासु</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- किम् (स्त्रीलिंग) टेबल -->
+    <div class="word-detail-section" id="detail-sarvanaam-stree-kim">
+      <div class="word-heading">किम् – स्त्रीलिंग (का)</div>
+      <div class="table-container">
+        <div class="table-header-bar">किम् शब्दरूप (स्त्रीलिंग)</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>का</td><td>के</td><td>काः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>काम्</td><td>के</td><td>काः</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>कया</td><td>काभ्याम्</td><td>काभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>कस्यै</td><td>काभ्याम्</td><td>काभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>कस्याः</td><td>काभ्याम्</td><td>काभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>कस्याः</td><td>कयोः</td><td>कासाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>कस्याम्</td><td>कयोः</td><td>कासु</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- इदम् (स्त्रीलिंग) टेबल -->
+    <div class="word-detail-section" id="detail-sarvanaam-stree-idam">
+      <div class="word-heading">इदम् – स्त्रीलिंग (इयम्)</div>
+      <div class="table-container">
+        <div class="table-header-bar">इदम् शब्दरूप (स्त्रीलिंग)</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>इयम्</td><td>इमे</td><td>इमाः</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>इमाम्</td><td>इमे</td><td>इमाः</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>अनया</td><td>आभ्याम्</td><td>आभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>अस्यै</td><td>आभ्याम्</td><td>आभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>अस्याः</td><td>आभ्याम्</td><td>आभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>अस्याः</td><td>अनयोः</td><td>आसाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>अस्याम्</td><td>अनयोः</td><td>आसु</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 16: सर्वनाम (नपुंसकलिंग) -->
+  <div class="category-section">
+    <div class="category-title">16. सर्वनाम (नपुंसकलिंग)</div>
+    <div class="pills-container" id="pills-sarvanaam-napunsak">
+      <button class="pill-btn active" onclick="showWord('sarvanaam-napunsak', 'tad', this)">तद् (तत्)</button>
+      <button class="pill-btn" onclick="showWord('sarvanaam-napunsak', 'etad', this)">एतद् (एतत्)</button>
+      <button class="pill-btn" onclick="showWord('sarvanaam-napunsak', 'kim', this)">किम् (किम्)</button>
+      <button class="pill-btn" onclick="showWord('sarvanaam-napunsak', 'idam', this)">इदम् (इदम्)</button>
+    </div>
+    
+    <!-- तद् (नपुंसकलिंग) टेबल -->
+    <div class="word-detail-section active" id="detail-sarvanaam-napunsak-tad">
+      <div class="word-heading">तद् – नपुंसकलिंग (तत्)</div>
+      <div class="table-container">
+        <div class="table-header-bar">तद् शब्दरूप (नपुंसकलिंग)</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>तत्</td><td>ते</td><td>तानि</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>तत्</td><td>ते</td><td>तानि</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>तेन</td><td>ताभ्याम्</td><td>तैः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>तस्मै</td><td>ताभ्याम्</td><td>तेभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>तस्मात्</td><td>ताभ्याम्</td><td>तेभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>तस्य</td><td>तयोः</td><td>तेषाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>तस्मिन्</td><td>तयोः</td><td>तेषु</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- एतद् (नपुंसकलिंग) टेबल -->
+    <div class="word-detail-section" id="detail-sarvanaam-napunsak-etad">
+      <div class="word-heading">एतद् – नपुंसकलिंग (एतत्)</div>
+      <div class="table-container">
+        <div class="table-header-bar">एतद् शब्दरूप (नपुंसकलिंग)</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>एतत्</td><td>एते</td><td>एतानि</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>एतत्</td><td>एते</td><td>एतानि</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>एतेन</td><td>एताभ्याम्</td><td>एतैः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>एतस्मै</td><td>एताभ्याम्</td><td>एतेभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>एतस्मात्</td><td>एताभ्याम्</td><td>एतेभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>एतस्य</td><td>एतयोः</td><td>एतेषाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>एतस्मिन्</td><td>एतयोः</td><td>एतेषु</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- किम् (नपुंसकलिंग) टेबल -->
+    <div class="word-detail-section" id="detail-sarvanaam-napunsak-kim">
+      <div class="word-heading">किम् – नपुंसकलिंग (किम्)</div>
+      <div class="table-container">
+        <div class="table-header-bar">किम् शब्दरूप (नपुंसकलिंग)</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>किम्</td><td>के</td><td>कानि</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>किम्</td><td>के</td><td>कानि</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>केन</td><td>काभ्याम्</td><td>कैः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>कस्मै</td><td>काभ्याम्</td><td>केभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>कस्मात्</td><td>काभ्याम्</td><td>केभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>कस्य</td><td>कयोः</td><td>केषाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>कस्मिन्</td><td>कयोः</td><td>केषु</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- इदम् (नपुंसकलिंग) टेबल -->
+    <div class="word-detail-section" id="detail-sarvanaam-napunsak-idam">
+      <div class="word-heading">इदम् – नपुंसकलिंग (इदम्)</div>
+      <div class="table-container">
+        <div class="table-header-bar">इदम् शब्दरूप (नपुंसकलिंग)</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>इदम्</td><td>इमे</td><td>इमानि</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>इदम्</td><td>इमे</td><td>इमानि</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>अनेन</td><td>आभ्याम्</td><td>एभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>अस्मै</td><td>आभ्याम्</td><td>एभ्यः</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>अतः / अस्मात्</td><td>आभ्याम्</td><td>एभ्यः</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>अस्य</td><td>अनयोः</td><td>एषाम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>अस्मिन्</td><td>अनयोः</td><td>एषु</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 17: सर्वनाम - अस्मद् (उत्तम पुरुष) -->
+  <div class="category-section">
+    <div class="category-title">17. सर्वनाम - अस्मद् (उत्तम पुरुष)</div>
+    <div class="pills-container" id="pills-asmad">
+      <button class="pill-btn active" onclick="showWord('asmad', 'aham', this)">अहम्</button>
+    </div>
+    
+    <!-- अस्मद् टेबल -->
+    <div class="word-detail-section active" id="detail-asmad-aham">
+      <div class="word-heading">अस्मद् – उत्तम पुरुष</div>
+      <div class="table-container">
+        <div class="table-header-bar">अस्मद् शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>अहम्</td><td>आवाम्</td><td>वयम्</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>माम्</td><td>आवाम्</td><td>अस्मान्</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>मया</td><td>आवाभ्याम्</td><td>अस्माभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>मह्यम्</td><td>आवाभ्याम्</td><td>अस्मभ्यम्</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>मत्</td><td>आवाभ्याम्</td><td>अस्मत्</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>मम</td><td>आवयोः</td><td>अस्माकम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>मयि</td><td>आवयोः</td><td>अस्मासु</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 18: सर्वनाम - युष्मद् (मध्यम पुरुष) -->
+  <div class="category-section">
+    <div class="category-title">18. सर्वनाम - युष्मद् (मध्यम पुरुष)</div>
+    <div class="pills-container" id="pills-yushmad">
+      <button class="pill-btn active" onclick="showWord('yushmad', 'tvam', this)">त्वम्</button>
+    </div>
+    
+    <!-- युष्मद् टेबल -->
+    <div class="word-detail-section active" id="detail-yushmad-tvam">
+      <div class="word-heading">युष्मद् – मध्यम पुरुष</div>
+      <div class="table-container">
+        <div class="table-header-bar">युष्मद् शब्दरूप</div>
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr></thead>
+            <tbody>
+              <tr><td class="vibhakti-col">प्रथमा</td><td>त्वम्</td><td>युवाम्</td><td>यूयम्</td></tr>
+              <tr><td class="vibhakti-col">द्वितीया</td><td>त्वाम्</td><td>युवाम्</td><td>युष्मान्</td></tr>
+              <tr><td class="vibhakti-col">तृतीया</td><td>त्वया</td><td>युवाभ्याम्</td><td>युष्माभिः</td></tr>
+              <tr><td class="vibhakti-col">चतुर्थी</td><td>तुभ्यम्</td><td>युवाभ्याम्</td><td>युष्मभ्यम्</td></tr>
+              <tr><td class="vibhakti-col">पञ्चमी</td><td>त्वत्</td><td>युवाभ्याम्</td><td>युष्मत्</td></tr>
+              <tr><td class="vibhakti-col">षष्ठी</td><td>तव</td><td>युवयोः</td><td>युष्माकम्</td></tr>
+              <tr><td class="vibhakti-col">सप्तमी</td><td>त्वयि</td><td>युवयोः</td><td>युष्मासु</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Branding Footer -->
+  <div class="branding">
+    <h3>संस्कृत ज्ञान</h3>
+    <p>संस्कृत व्याकरण, शब्दरूप, धातुरूप और साहित्य की सम्पूर्ण जानकारी हेतु हमारी वेबसाइट पर पधारें।</p>
+    <a href="https://www.sanskritgyan.in" target="_blank">www.sanskritgyan.in</a>
+  </div>
+</div>
+
+<script>
+  // --- Search Data ---
+  const searchData = [
+    { keyword: "ram, राम", category: "akarant-pulling", wordId: "ram", wordName: "राम" },
+    { keyword: "dev, देव", category: "akarant-pulling", wordId: "dev", wordName: "देव" },
+    { keyword: "nar, नर", category: "akarant-pulling", wordId: "nar", wordName: "नर" },
+    { keyword: "ashva, अश्व, ashwa", category: "akarant-pulling", wordId: "ashva", wordName: "अश्व" },
+    { keyword: "hasta, हस्त", category: "akarant-pulling", wordId: "hasta", wordName: "हस्त" },
+    { keyword: "balak, बालक", category: "akarant-pulling", wordId: "balak", wordName: "बालक" },
+    
+    { keyword: "sita, सीता", category: "akarant-stree", wordId: "sita", wordName: "सीता" },
+    { keyword: "lata, लता", category: "akarant-stree", wordId: "lata", wordName: "लता" },
+    { keyword: "kanya, कन्या", category: "akarant-stree", wordId: "kanya", wordName: "कन्या" },
+    
+    { keyword: "hari, हरि", category: "ikarant-pulling", wordId: "hari", wordName: "हरि" },
+    { keyword: "kavi, कवि", category: "ikarant-pulling", wordId: "kavi", wordName: "कवि" },
+    { keyword: "muni, मुनि", category: "ikarant-pulling", wordId: "muni", wordName: "मुनि" },
+    { keyword: "agni, अग्नि", category: "ikarant-pulling", wordId: "agni", wordName: "अग्नि" },
+    
+    { keyword: "nadi, नदी", category: "ikarant-stree", wordId: "nadi", wordName: "नदी" },
+    { keyword: "nagari, नगरी", category: "ikarant-stree", wordId: "nagari", wordName: "नगरी" },
+    { keyword: "shakti, शक्ति", category: "ikarant-stree", wordId: "shakti", wordName: "शक्ति" },
+    { keyword: "mati, मति", category: "ikarant-stree", wordId: "mati", wordName: "मति" },
+    
+    { keyword: "guru, गुरु", category: "ukarant-pulling", wordId: "guru", wordName: "गुरु" },
+    { keyword: "shatru, शत्रु", category: "ukarant-pulling", wordId: "shatru", wordName: "शत्रु" },
+    { keyword: "bhanu, भानु", category: "ukarant-pulling", wordId: "bhanu", wordName: "भानु" },
+    { keyword: "sadhu, साधु", category: "ukarant-pulling", wordId: "sadhu", wordName: "साधु" },
+    
+    { keyword: "phal, फल", category: "napunsakling", wordId: "phal", wordName: "फल" },
+    { keyword: "jal, जल", category: "napunsakling", wordId: "jal", wordName: "जल" },
+    { keyword: "van, वन", category: "napunsakling", wordId: "van", wordName: "वन" },
+    
+    { keyword: "pitri, पितृ", category: "rikarant-pulling", wordId: "pitri", wordName: "पितृ" },
+    { keyword: "bhratri, भ्रातृ", category: "rikarant-pulling", wordId: "bhratri", wordName: "भ्रातृ" },
+    { keyword: "datri, दातृ", category: "rikarant-pulling", wordId: "datri", wordName: "दातृ" },
+    
+    { keyword: "matri, मातृ", category: "rikarant-stree", wordId: "matri", wordName: "मातृ" },
+    { keyword: "swasri, स्वसृ", category: "rikarant-stree", wordId: "swasri", wordName: "स्वसृ" },
+    
+    { keyword: "vadhu, वधू", category: "ukarant-stree", wordId: "vadhu", wordName: "वधू" },
+    { keyword: "chamu, चमू", category: "ukarant-stree", wordId: "chamu", wordName: "चमू" },
+    { keyword: "dhenu, धेनु", category: "ukarant-stree", wordId: "dhenu", wordName: "धेनु" },
+    
+    { keyword: "rajan, राजन्, raja", category: "halant-pulling", wordId: "rajan", wordName: "राजन्" },
+    { keyword: "atman, आत्मन्, atma", category: "halant-pulling", wordId: "atman", wordName: "आत्मन्" },
+    { keyword: "bhagavat, भगवत्, bhagwan", category: "halant-pulling", wordId: "bhagavat", wordName: "भगवत्" },
+    { keyword: "bhavat, भवत्", category: "halant-pulling", wordId: "bhavat", wordName: "भवत्" },
+    { keyword: "vidvas, विद्वस्", category: "halant-pulling", wordId: "vidvas", wordName: "विद्वस्" },
+    
+    { keyword: "vach, वाच्, vani", category: "halant-stree", wordId: "vach", wordName: "वाच्" },
+    { keyword: "sraj, स्रज्, mala", category: "halant-stree", wordId: "sraj", wordName: "स्रज्" },
+    
+    { keyword: "jagat, जगत्, sansar", category: "halant-napunsakling", wordId: "jagat", wordName: "जगत्" },
+    { keyword: "manas, मनस्", category: "halant-napunsakling", wordId: "manas", wordName: "मनस्" },
+    { keyword: "chakshush, चक्षुष्", category: "halant-napunsakling", wordId: "chakshush", wordName: "चक्षुष्" },
+    
+    { keyword: "vari, वारि", category: "napunsak-ikarant", wordId: "vari", wordName: "वारि" },
+    
+    { keyword: "tad pulling, तद्, sah, saha", category: "sarvanaam-pulling", wordId: "tad", wordName: "तद् (सः)" },
+    { keyword: "etad pulling, एतद्, eshah", category: "sarvanaam-pulling", wordId: "etad", wordName: "एतद् (एषः)" },
+    { keyword: "kim pulling, किम्, kah, kaun", category: "sarvanaam-pulling", wordId: "kim", wordName: "किम् (कः)" },
+    { keyword: "idam pulling, इदम्, ayam", category: "sarvanaam-pulling", wordId: "idam", wordName: "इदम् (अयम्)" },
+    
+    { keyword: "tad stree, तद्, sa, saa", category: "sarvanaam-stree", wordId: "tad", wordName: "तद् (सा)" },
+    { keyword: "etad stree, एतद्, esha", category: "sarvanaam-stree", wordId: "etad", wordName: "एतद् (एषा)" },
+    { keyword: "kim stree, किम्, ka, kaa", category: "sarvanaam-stree", wordId: "kim", wordName: "किम् (का)" },
+    { keyword: "idam stree, इदम्, iyam", category: "sarvanaam-stree", wordId: "idam", wordName: "इदम् (इयम्)" },
+    
+    { keyword: "tad napunsak, तद्, tat", category: "sarvanaam-napunsak", wordId: "tad", wordName: "तद् (तत्)" },
+    { keyword: "etad napunsak, एतद्, etat", category: "sarvanaam-napunsak", wordId: "etad", wordName: "एतद् (एतत्)" },
+    { keyword: "kim napunsak, किम्, kim", category: "sarvanaam-napunsak", wordId: "kim", wordName: "किम् (किम्)" },
+    { keyword: "idam napunsak, इदम्, idam", category: "sarvanaam-napunsak", wordId: "idam", wordName: "इदम् (इदम्)" },
+    
+    { keyword: "asmad, अस्मद्, aham, अहम्, mai, main", category: "asmad", wordId: "aham", wordName: "अहम्" },
+    { keyword: "yushmad, युष्मद्, tvam, त्वम्, tu, tum", category: "yushmad", wordId: "tvam", wordName: "त्वम्" }
+  ];
+
+  const searchInput = document.getElementById('searchInput');
+  const suggestionsBox = document.getElementById('suggestionsBox');
+
+  // --- Show Word Function ---
+  function showWord(categoryId, wordId, btnElement) {
+    const container = document.getElementById('pills-' + categoryId);
+    if(!container) return;
+    
+    const buttons = container.getElementsByClassName('pill-btn');
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].classList.remove('active');
+    }
+    
+    if (btnElement) {
+      btnElement.classList.add('active');
+    }
+
+    const categorySection = container.parentElement;
+    const details = categorySection.getElementsByClassName('word-detail-section');
+    for (let i = 0; i < details.length; i++) {
+      details[i].classList.remove('active');
+    }
+
+    const targetDetail = document.getElementById('detail-' + categoryId + '-' + wordId);
+    if (targetDetail) {
+      targetDetail.classList.add('active');
+    }
+  }
+
+  // --- Search Logic ---
+  searchInput.addEventListener('input', function() {
+    const query = this.value.toLowerCase().trim();
+    suggestionsBox.innerHTML = '';
+    
+    if (query.length === 0) {
+      suggestionsBox.style.display = 'none';
+      return;
+    }
+
+    const filtered = searchData.filter(item => 
+      item.keyword.toLowerCase().includes(query) || item.wordName.includes(query)
+    );
+
+    if (filtered.length > 0) {
+      suggestionsBox.style.display = 'block';
+      filtered.forEach(item => {
+        const div = document.createElement('div');
+        div.textContent = item.wordName;
+        div.addEventListener('click', function() {
+          const container = document.getElementById('pills-' + item.category);
+          if(container) {
+            const buttons = container.getElementsByClassName('pill-btn');
+            for(let btn of buttons) {
+               if(btn.textContent === item.wordName) {
+                   btn.click();
+                   break;
+               }
+            }
+            container.parentElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+          
+          searchInput.value = item.wordName;
+          suggestionsBox.style.display = 'none';
+        });
+        suggestionsBox.appendChild(div);
+      });
+    } else {
+      suggestionsBox.style.display = 'none';
+    }
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!searchInput.contains(e.target) && !suggestionsBox.contains(e.target)) {
+      suggestionsBox.style.display = 'none';
+    }
+  });
+</script>
+</body>
+</html>
